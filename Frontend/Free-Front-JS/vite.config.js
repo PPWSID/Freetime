@@ -28,6 +28,6 @@ export default ({ mode }) => {
         }
       }
     },
-    base: '/free-time/'
+    base: '/'
   });
 };

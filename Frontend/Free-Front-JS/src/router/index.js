@@ -1,19 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import AppView from '../App.vue';
 import HomeView from '../views/HomeView.vue';
-import '../styles/style.css'
+import DashboardRoutes from './dashboard.js'
 const router = createRouter({
-  history: createWebHistory('/free-time/'),
+  history: createWebHistory('/'),
   routes: [
     {
       path: '/',
       name: 'home',
       component: HomeView
     },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue')
+    ...DashboardRoutes,
+    { 
+      path: '/:pathMatch(.*)*', 
+      name: 'NotFound', 
+      component: () => import('../views/NotFound.vue') 
     }
   ]
 });

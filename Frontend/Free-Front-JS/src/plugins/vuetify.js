@@ -31,6 +31,21 @@ const myCustomLightTheme = {
   }
 };
 
+const spaceDark = {
+    dark: true, 
+    colors: {
+      background: '#0a0f1c', 
+      surface: '#1a2238',    
+      primary: '#00ffff',   
+      secondary: '#7f5af0',  
+      accent: '#ff80b5', 
+      info: '#00bcd4', 
+      success: '#22c55e',
+      warning: '#f59e0b',
+      error: '#ef4444',
+  }
+}
+
 const vuetify = createVuetify({
   components,
   directives,
@@ -42,10 +57,16 @@ const vuetify = createVuetify({
     }
   },
   theme: {
-    defaultTheme: 'myCustomLightTheme',
+    defaultTheme: 'spaceDark',
     themes: {
       myCustomLightTheme: {
         ...myCustomLightTheme,
+        variables: {
+          fontFamily: '"Sukhumvit Set", sans-serif'
+        }
+      },
+      spaceDark: {
+        ...spaceDark,
         variables: {
           fontFamily: '"Sukhumvit Set", sans-serif'
         }

@@ -13,6 +13,9 @@ npm create vite@latest
     vue-axios :Integration ระหว่าง Vue และ Axios
     vue-router : ระบบ routing จัดการหน้าเพจใน Vue
     vuetify : UI Component Framework สำหรับ Vue ที่อิง Material Design
+    @heroicons/vue" : ICON
+    vue-chartjs & chart.js : chart data
+
     
 -structure : 
     component : 
@@ -24,3 +27,4 @@ npm create vite@latest
     stores
     styles
     views
+

@@ -3,6 +3,7 @@ import { computed, ref } from 'vue';
 
 export const useLoaderStore = defineStore('loader', () => {
   const isLoading = ref({
+    filtersetup: false,
     latestUpdateDate: false,
   });
 

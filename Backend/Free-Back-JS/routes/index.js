@@ -1,7 +1,8 @@
 require('../config/global');
+const router = express.Router();
 const testController = require('../controllers/index');
 
-const router = express.Router();
+
 
 router.get('/', testController.testResponse);
 

@@ -3,7 +3,7 @@ require('./config/global');
 
 //----------- Require Router -----------//
 const testRouter = require('./routes/index');
-
+const dashboardRouter = require('./routes/dashboard/dashboard');
 //----------- Require Package -----------//
 
 //---- Config -----//
@@ -20,7 +20,7 @@ app.use(cors());
 
 //------------- Route -------------//
 app.use('/api/test', testRouter);
-
+app.use('/api/dashboard', dashboardRouter);
 
 
 

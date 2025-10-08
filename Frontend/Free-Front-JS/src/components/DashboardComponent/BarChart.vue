@@ -1,53 +1,128 @@
 <script setup>
-import { Bar } from "vue-chartjs";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip, Legend, Title } from "chart.js";
-import { ref } from "vue";
-import CardSection from "./CardSection.vue";
-import NoDataComponent from "./NoData.vue";
+    import { Bar } from "vue-chartjs";
+    import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip, Legend, Title } from "chart.js";
+    import { ref, watch, reactive, computed , onMounted} from "vue";
+    import CardSection from "./CardSection.vue";
+    import NoDataComponent from "./NoData.vue";
+    import dashboardService from "../../services/dashboardHttps";
+    import { useFilterStore } from "../../stores/filter";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend, Title);
+    ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend, Title);
+    const filterStore = useFilterStore();
 
-const chartData = ref({
-  labels: ['Node.js', 'Vue', 'Golang', 'React', 'PHP'],
-  datasets: [
-    {
-      label: 'Skill Level',
-      data: [10, 20, 30, 40, 50],
-      backgroundColor: ['#ff6f91','#00bcd4','#4caf50','#ffa726','#e53935'], // Dark theme colors
-    }
-  ]
-});
+    // Chrat mock
+   /*
+    const chartData = ref({
+      labels: mapCodeName(),
+      datasets: [
+        {
+          label: 'Skill Level',
+          data: [10, 20, 30, 40, 50],
+          backgroundColor: ['#ff6f91','#00bcd4','#4caf50','#ffa726','#e53935'], // Dark theme colors
+        }
+      ]
+    });
+   */
 
-const chartOptions = ref({
-  responsive: true,
-  plugins: {
-    legend: { 
-      position: 'top',
-      labels: { color: '#ffffff' } // สีตัวอักษร legend
-    },
-    tooltip: { 
-      enabled: true,
-      titleColor: '#ffffff', 
-      bodyColor: '#ffffff',
-      backgroundColor: '#222222'
-    },
-    title: { 
-      display: true, 
-      text: 'Skill Level Bar Chart',
-      color: '#ffffff'
-    }
-  },
-  scales: {
-    x: {
-      ticks: { color: '#ffffff' }, // สี label แกน X
-      grid: { color: '#444444' }   // สีเส้น grid แกน X
-    },
-    y: {
-      ticks: { color: '#ffffff' }, // สี label แกน Y
-      grid: { color: '#444444' }   // สีเส้น grid แกน Y
-    }
-  }
-});
+    const codeColorMap = {
+      Golang: '#0E2954',    // Cyan (Space Dark)
+      'Node.js': '#1F6E8C', // Greenish Cyan
+      PHP: '#2E8A99',       // Light Cyan/Blue
+      React: '#84A7A1',     // Deep Cyan
+      Vue: '#64ffda',       // Greenish
+    };
+
+    const chartData = computed(() => {
+      const codeName = mapCodeName();
+      const backgroundColor = codeName.map(code => codeColorMap[code] || '#ccc');
+      // console.log("codeName" ,codeName );
+      
+      const countNumber = mapCodeTotal();
+      return {
+        labels: codeName,
+        datasets: [
+          {
+            backgroundColor: backgroundColor,
+            data: countNumber,
+          },
+        ],
+      };
+    });
+
+    const chartOptions = ref({
+      responsive: true,
+      plugins: {
+        legend: { 
+          display : false,
+          // position: 'bottom',
+          // labels: { color: '#ffffff' }
+        },
+        tooltip: { 
+          enabled: true,
+          titleColor: '#ffffff', 
+          bodyColor: '#ffffff',
+          backgroundColor: '#222222'
+        },
+        title: { 
+          display: true, 
+          text: 'Summary Total Bar Chart',
+          color: '#ffffff'
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#ffffff' }, // สี label แกน X
+          grid: { color: '#444444' }   // สีเส้น grid แกน X
+        },
+        y: {
+          ticks: { color: '#ffffff' }, // สี label แกน Y
+          grid: { color: '#444444' }   // สีเส้น grid แกน Y
+        }
+      }
+    });
+
+
+    const Data = ref([]);
+
+    async function fetchData(filterParams = {}) {
+      try {
+        const { data: response } = await dashboardService.getDataBarChart(filterParams);
+        
+        if (response.status) {
+          Data.value= response.data
+          // console.log(response.data);
+          
+          return response.data;
+        } else {
+          console.error('Error in response status: ', response);
+          return null;
+        }
+      } catch (error) {
+        console.error('Error fetching location data: ', error);
+        return null;
+      };
+    };
+
+    const mapCodeName = () => {
+      return Data.value.map((data) => data.code);
+    };
+
+    const mapCodeTotal = () => {
+      return Data.value.map((data) => data.total);
+    };
+
+    // onMounted(() => {
+    //     fetchData();
+    // });
+
+    watch(
+      () => filterStore.filter,
+      async (newFilter) => {
+        await fetchData(newFilter);
+      },
+      { deep: true, immediate: false }
+    );
+
 </script>
 
 <!-- Original Template -->

@@ -1,6 +1,7 @@
 require('../config/global');
 
 async function logConsoleError(error) {
+    
     let message = error.message;
     let code = error.code || "NO_CODE";
     let stackLines = error.stack.split("\n");

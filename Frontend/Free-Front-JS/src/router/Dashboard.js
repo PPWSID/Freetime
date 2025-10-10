@@ -18,5 +18,5 @@ export default [
     path: "/dashboard/table",
     name: "Dashboard-table",
     component: () => import("../components/DashboardComponent/Table.vue"),
-  }
+  },
 ]

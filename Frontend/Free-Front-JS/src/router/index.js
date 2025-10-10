@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import DashboardRoutes from './dashboard.js'
+import InvestStakeRoutes from './InvestStake.js'
 const router = createRouter({
   history: createWebHistory('/'),
   routes: [
@@ -10,6 +11,7 @@ const router = createRouter({
       component: HomeView
     },
     ...DashboardRoutes,
+    ...InvestStakeRoutes,
     { 
       path: '/:pathMatch(.*)*', 
       name: 'NotFound', 

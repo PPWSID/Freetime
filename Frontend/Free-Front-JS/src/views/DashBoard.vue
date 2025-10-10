@@ -23,10 +23,10 @@ const route = useRoute();
           </v-col>
         
           <v-row>
-              <v-col cols='12' sm='6'>
+              <v-col cols='12' sm='6' md="6">
                 <DoughnutChart />
               </v-col>
-              <v-col cols='12' sm='6'>
+              <v-col cols='12' sm='6' md='6'>
                 <BarChart />
               </v-col>
           </v-row>

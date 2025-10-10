@@ -43,9 +43,11 @@ const server = app.listen(port, () => {
 });
 
 server.on('error', (err) => {
-  console.log(`${Colorsred}[failed] task 1 start service port : ${port}`);
+  console.log(`${Colors.red}[failed] task 1 start service port : ${port}`);
   console.error(err);
   console.log(`${Colors.yellow}Exit process with code 1`);
+  console.log(`${Colors.yellow} try in cmd :  ${Colors.cyan} netstat -ano | findstr :port \n then : taskkill /PID <PID> /F ${Colors.yellow} to kill process`);
+  
   process.exit(1);
 });
 

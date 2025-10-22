@@ -1,3 +1,4 @@
+import { createApp } from 'vue'
 import { createVuetify } from 'vuetify';
 import '@/styles/main.scss';
 import { aliases, mdi } from 'vuetify/iconsets/mdi';

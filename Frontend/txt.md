@@ -28,3 +28,7 @@ npm create vite@latest
     styles
     views
 
+-env :
+    VITE_BACKEND_API=http:path
+
+****NOTE : Non-responsive

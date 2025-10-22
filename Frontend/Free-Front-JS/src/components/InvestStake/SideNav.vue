@@ -19,7 +19,7 @@
     <v-navigation-drawer app permanent color="#0e0e12" class="text-white">
 
         <div class="d-flex align-center pa-4">
-            <v-img src="../../assets/icons/engagement.png" max-width="60" class="mr-2"></v-img>
+            <v-img src="../../assets/icons/engagement.png" max-width="60"></v-img>
             <div class="nav-header-compo-text">
                 <div class="font-weight-bold">Stakent® Engage</div>
                 <small class="text-grey">Free Times Engagement</small>
@@ -56,30 +56,32 @@
         <v-divider class="my-2">  
         </v-divider>
         
-        <div class="user-banner-footer d-flex align-center pa-4  ">
-            <v-img src="../../assets/icons/people.png" class="mr-2"></v-img>
+        <!-- USER Profile -->
+        <div class="user-banner-footer d-flex align-center pa-4">
+            <v-img src="../../assets/icons/people.png" class="mr-2" max-width="40"/>
             <div class="nav-footter-compo-text">
                 <div class="font-weight-bold">
-                    @PWSID_P
-                    <v-chip
-                        size="x-small"
-                        color="red"
-                        label
-                    >
-                    Role
+                    <small style="font-size: 14px;">@PWSID_P</small>
+                    <v-chip size="x-small" color="red" label>
+                    <small style="font-size: 12px;"> Role </small>
                     </v-chip>
 
                 </div>
                 <small class="text-grey">Peerapon Permpoonmahasalkkkkkkkkkkkkkkhhhhhhhhhhhhhhhhhh</small>
             </div>
         </div>
+
     </v-navigation-drawer>
 </template>
 
 <style scoped>
 .v-navigation-drawer {
   width: 260px;
+  height: 100vh;;
   border-right: 1px solid #1f1f25;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 .nav-header-compo-text {
     align-items: center;
@@ -111,9 +113,10 @@
 }
 
 .user-banner-footer {
-    margin-top: 40% ;
+    
     width: 260px;
     display: flex;
+    align-self: flex-end ;
 }
 
 .user-banner-footer v-img {
